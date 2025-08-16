@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aryaa Manjrekar - Portfolio</title>
+    
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- AOS (Animate On Scroll) CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- TailwindCSS Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'custom-bg': '#FFF9F2',
+                        'custom-primary': '#66000E',
+                        'custom-secondary': '#8B0000',
+                        'custom-accent': '#DC143C'
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif']
+                    },
+                                         animation: {
+                         'blink': 'blink 1s infinite',
+                         'fade-in-up': 'fadeInUp 0.6s ease-out',
+                         'slide-up': 'slideUp 0.8s ease-out'
+                     },
+                     keyframes: {
+                         blink: {
+                             '0%, 50%': { opacity: '1' },
+                             '51%, 100%': { opacity: '0' }
+                         },
+                         fadeInUp: {
+                             '0%': { opacity: '0', transform: 'translateY(30px)' },
+                             '100%': { opacity: '1', transform: 'translateY(0)' }
+                         },
+                         slideUp: {
+                             '0%': { opacity: '0', transform: 'translateY(50px)' },
+                             '100%': { opacity: '1', transform: 'translateY(0)' }
+                         }
+                     }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .typewriter-text {
+            overflow: hidden;
+            white-space: nowrap;
+            min-height: 1.5em;
+        }
+        
+        .blinking-cursor {
+            animation: blink 1s infinite;
+            color: #66000E;
+            font-weight: bold;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #66000E, #DC143C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .skill-card {
+            transition: all 0.3s ease;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 0, 14, 0.1);
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px) scale(1.1);
+            color: #DC143C;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #66000E, #8B0000);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 0, 14, 0.3);
+        }
+        
+        .btn-secondary {
+            border: 2px solid #66000E;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: #66000E;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #FFF9F2;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #66000E;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8B0000;
+        }
+    </style>
+</head>
+<body class="bg-custom-bg text-gray-800 font-inter">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-effect">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-2xl font-bold text-custom-primary">Aryaa</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-custom-primary transition-colors duration-300">Home</a>
+                    <a href="#about" class="text-gray-700 hover:text-custom-primary transition-colors duration-300">About</a>
+                    <a href="#skills" class="text-gray-700 hover:text-custom-primary transition-colors duration-300">Skills</a>
+                    <a href="#contact" class="text-gray-700 hover:text-custom-primary transition-colors duration-300">Contact</a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-custom-primary">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-effect">
+            <div class="px-4 py-2 space-y-2">
+                <a href="#home" class="block py-2 text-gray-700 hover:text-custom-primary transition-colors duration-300">Home</a>
+                <a href="#about" class="block py-2 text-gray-700 hover:text-custom-primary transition-colors duration-300">About</a>
+                <a href="#skills" class="block py-2 text-gray-700 hover:text-custom-primary transition-colors duration-300">Skills</a>
+                <a href="#contact" class="block py-2 text-gray-700 hover:text-custom-primary transition-colors duration-300">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 px-4">
+        <div class="max-w-4xl mx-auto text-center" data-aos="fade-up" data-aos-duration="1000">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
+                Hi, I'm <span class="gradient-text">Aryaa Manjrekar</span>
+            </h1>
+            
+            <div class="text-xl md:text-2xl lg:text-3xl mb-8 h-12">
+                <span class="typewriter-text">a Software Developer</span>
+            </div>
+            
+            <p class="text-lg md:text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+                I'm a final-year Computer Science and Design Engineering student passionate about creating innovative software solutions and leveraging Generative AI technologies.
+            </p>
+            
+            <!-- Social Media Icons -->
+            <div class="flex justify-center space-x-6 mb-12">
+                <a href="https://twitter.com/AryaaManjrekar" target="_blank" class="social-icon text-2xl text-gray-600 hover:text-custom-primary">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/aryaa-manjrekar/" target="_blank" class="social-icon text-2xl text-gray-600 hover:text-custom-primary">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/aryaa4" target="_blank" class="social-icon text-2xl text-gray-600 hover:text-custom-primary">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.youtube.com/@aryaa.manjrekar" target="_blank" class="social-icon text-2xl text-gray-600 hover:text-custom-primary">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+            
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#skills" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold inline-block">
+                    View My Work
+                </a>
+                <a href="#contact" class="btn-secondary text-custom-primary px-8 py-3 rounded-lg font-semibold inline-block">
+                    Let's Connect
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="py-20 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-custom-primary" data-aos="fade-up">
+                About Me
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6" data-aos="fade-right" data-aos-duration="800">
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        Final-year Computer Science and Design Engineering student with a focus on developing efficient, user-centric software and leveraging Generative AI technologies to enhance digital solutions.
+                    </p>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        Strong foundation in programming, problem-solving, and creative thinking, complemented by a disciplined approach shaped through consistent athletic training.
+                    </p>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        Committed to delivering high-quality results and continuously advancing technical expertise. My approach blends traditional engineering principles with cutting-edge AI technology to deliver solutions that not only function flawlessly but also create meaningful impact for users and clients alike.
+                    </p>
+                </div>
+                
+                <div class="flex justify-center" data-aos="fade-left" data-aos-duration="800">
+                    <div class="w-80 h-80 bg-gradient-to-br from-custom-primary to-custom-accent rounded-full flex items-center justify-center">
+                        <div class="text-white text-center">
+                            <i class="fas fa-code text-6xl mb-4"></i>
+                            <p class="text-xl font-semibold">AI & Software Developer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills & Expertise Section -->
+    <section id="skills" class="py-20 px-4 bg-custom-bg">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-custom-primary" data-aos="fade-up">
+                Skills & Expertise
+            </h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Programming Languages & Frameworks -->
+                <div class="skill-card bg-white p-8 rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-code text-4xl text-custom-primary mb-4"></i>
+                        <h3 class="text-xl font-semibold text-custom-primary">Programming Languages & Frameworks</h3>
+                    </div>
+                    <ul class="space-y-2 text-gray-700">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>JavaScript (ES6+)</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>React.js</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Node.js</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Express.js</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>MongoDB</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Bootstrap</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Tailwind CSS</li>
+                    </ul>
+                </div>
+
+                <!-- AI & Emerging Technologies -->
+                <div class="skill-card bg-white p-8 rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-robot text-4xl text-custom-primary mb-4"></i>
+                        <h3 class="text-xl font-semibold text-custom-primary">AI & Emerging Technologies</h3>
+                    </div>
+                    <ul class="space-y-2 text-gray-700">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Generative AI</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Prompt Engineering</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>API Integration</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>OpenAI API</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>LangChain</li>
+                    </ul>
+                </div>
+
+                <!-- Web Development -->
+                <div class="skill-card bg-white p-8 rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-globe text-4xl text-custom-primary mb-4"></i>
+                        <h3 class="text-xl font-semibold text-custom-primary">Web Development</h3>
+                    </div>
+                    <ul class="space-y-2 text-gray-700">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Responsive Web Design</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>RESTful APIs</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Frontend & Backend Integration</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>State Management (Redux)</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Authentication & Authorization</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Database Design & Management</li>
+                    </ul>
+                </div>
+
+                <!-- Other Tools & Technologies -->
+                <div class="skill-card bg-white p-8 rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-tools text-4xl text-custom-primary mb-4"></i>
+                        <h3 class="text-xl font-semibold text-custom-primary">Other Tools & Technologies</h3>
+                    </div>
+                    <ul class="space-y-2 text-gray-700">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Git & GitHub</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Postman</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Deployment (Vercel, Netlify, Heroku)</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>API Testing & Debugging</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Figma</li>
+                    </ul>
+                </div>
+
+                <!-- Soft Skills & Professional Strengths -->
+                <div class="skill-card bg-white p-8 rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="500">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-users text-4xl text-custom-primary mb-4"></i>
+                        <h3 class="text-xl font-semibold text-custom-primary">Soft Skills & Professional Strengths</h3>
+                    </div>
+                    <ul class="space-y-2 text-gray-700">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Problem-Solving & Analytical Thinking</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Collaboration & Teamwork</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Time Management</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Adaptability & Continuous Learning</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-6 text-custom-primary" data-aos="fade-up">
+                Let's work together
+            </h2>
+            
+            <p class="text-xl text-center text-gray-600 mb-16 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                Ready to bring your vision to life? Get in touch and let's discuss your next project.
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="space-y-6" data-aos="slide-up" data-aos-duration="800">
+                    <h3 class="text-2xl font-semibold text-custom-primary mb-6">Send me a message</h3>
+                    
+                    <form id="contact-form" class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Name *</label>
+                            <input type="text" id="name" name="name" required 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-custom-primary focus:border-transparent transition-all duration-300">
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                            <input type="email" id="email" name="email" required 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-custom-primary focus:border-transparent transition-all duration-300">
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject *</label>
+                            <input type="text" id="subject" name="subject" required 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-custom-primary focus:border-transparent transition-all duration-300">
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message *</label>
+                            <textarea id="message" name="message" rows="6" required 
+                                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-custom-primary focus:border-transparent transition-all duration-300"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold w-full">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Contact Information -->
+                <div class="space-y-8" data-aos="slide-up" data-aos-duration="800" data-aos-delay="200">
+                    <h3 class="text-2xl font-semibold text-custom-primary mb-6">Get in touch</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-custom-primary rounded-full flex items-center justify-center">
+                                <i class="fas fa-envelope text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Email</h4>
+                                <p class="text-gray-600">aryaa.manjrekar@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-custom-primary rounded-full flex items-center justify-center">
+                                <i class="fas fa-phone text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Phone</h4>
+                                <p class="text-gray-600">+91 7506563161</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-custom-primary rounded-full flex items-center justify-center">
+                                <i class="fas fa-map-marker-alt text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Location</h4>
+                                <p class="text-gray-600">Mumbai, India</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Additional Info -->
+                    <div class="bg-custom-bg p-6 rounded-lg">
+                        <h4 class="font-semibold text-custom-primary mb-3">Available for:</h4>
+                        <ul class="space-y-2 text-gray-700">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Freelance Projects</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Full-time Opportunities</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>AI Consulting</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Web Development</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-custom-primary text-white py-12 px-4">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-4">Aryaa Manjrekar</h3>
+                <p class="text-gray-300 max-w-md mx-auto">
+                    Software Developer, Generative AI Developer, YouTuber, Musician, and Fitness Enthusiast
+                </p>
+            </div>
+            
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="https://twitter.com/AryaaManjrekar" target="_blank" class="social-icon text-2xl text-white hover:text-gray-300">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/aryaa-manjrekar/" target="_blank" class="social-icon text-2xl text-white hover:text-gray-300">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/aryaa4" target="_blank" class="social-icon text-2xl text-white hover:text-gray-300">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.youtube.com/@aryaa.manjrekar" target="_blank" class="social-icon text-2xl text-white hover:text-gray-300">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+            
+            <div class="border-t border-gray-600 pt-8">
+                <p class="text-gray-300">&copy; 2024 Aryaa Manjrekar. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS (Animate On Scroll) JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- EmailJS for contact form -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <!-- Main JavaScript -->
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Typewriter effect for roles
+        const roles = [
+            'a Software Developer',
+            'a Generative AI Developer',
+            'a YouTuber',
+            'a Musician',
+            'a Fitness Enthusiast'
+        ];
+        
+        let currentRoleIndex = 0;
+        let currentCharIndex = 0;
+        let isDeleting = false;
+        const typewriterElement = document.querySelector('.typewriter-text');
+        
+        function typeWriter() {
+            const currentRole = roles[currentRoleIndex];
+            
+            if (isDeleting) {
+                // Delete characters
+                typewriterElement.textContent = currentRole.substring(0, currentCharIndex - 1);
+                currentCharIndex--;
+            } else {
+                // Type characters
+                typewriterElement.textContent = currentRole.substring(0, currentCharIndex + 1);
+                currentCharIndex++;
+            }
+            
+            // Add blinking cursor
+            typewriterElement.innerHTML = typewriterElement.textContent + '<span class="blinking-cursor">|</span>';
+            
+            let typeSpeed = 100; // Typing speed
+            
+            if (isDeleting) {
+                typeSpeed = 50; // Faster deletion
+            }
+            
+            if (!isDeleting && currentCharIndex === currentRole.length) {
+                // Finished typing, wait then start deleting
+                typeSpeed = 2000; // Wait 2 seconds
+                isDeleting = true;
+            } else if (isDeleting && currentCharIndex === 0) {
+                // Finished deleting, move to next role
+                isDeleting = false;
+                currentRoleIndex = (currentRoleIndex + 1) % roles.length;
+                typeSpeed = 500; // Wait 0.5 seconds before typing next role
+            }
+            
+            setTimeout(typeWriter, typeSpeed);
+        }
+        
+        // Start the typewriter effect
+        setTimeout(typeWriter, 1000);
+
+        // Initialize EmailJS
+        emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS user ID
+
+        // Contact form handling
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            // Send email using EmailJS
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
+                to_email: 'aryaa.manjrekar@gmail.com',
+                from_name: formData.name,
+                from_email: formData.email,
+                subject: formData.subject,
+                message: formData.message
+            })
+            .then(function(response) {
+                // Success
+                alert('Thank you for your message! I will get back to you soon.');
+                document.getElementById('contact-form').reset();
+            }, function(error) {
+                // Error
+                alert('Sorry, there was an error sending your message. Please try again.');
+            })
+            .finally(function() {
+                // Reset button
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
+        });
+
+        // Alternative: Simple form handling without EmailJS
+        // Uncomment the following if you don't want to use EmailJS
+        /*
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+            
+            // Show success message
+            alert('Thank you for your message! I will get back to you soon.');
+            
+            // Reset form
+            this.reset();
+        });
+        */
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+
+        // Add active state to navigation links
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('nav a[href^="#"]');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('text-custom-primary');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-custom-primary');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
